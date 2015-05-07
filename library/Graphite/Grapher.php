@@ -19,7 +19,7 @@ class Grapher extends GrapherHook
     protected $baseUrl = 'http://graphite.com/render/?';
     protected $metricPrefix = 'icinga';
     protected $graphWidth = 800;
-    protected $graphHeight = 600;
+    protected $graphHeight = 700;
     protected $connectLimit = 10;
 
     protected function init()
