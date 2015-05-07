@@ -18,12 +18,18 @@ class Grapher extends GrapherHook
     protected $graphiteConfig;
     protected $baseUrl = 'http://graphite.com/render/?';
     protected $metricPrefix = 'icinga';
+    protected $graphWidth = 800;
+    protected $graphHeight = 600;
+    protected $connectLimit = 10;
 
     protected function init()
     {
         $cfg = Config::module('graphite')->getSection('graphite');
-        $this->baseUrl   = rtrim($cfg->get('base_url', $this->baseUrl), '/');
-        $this->metricPrefix   = rtrim($cfg->get('metric_prefix', $this->metricPrefix), '/');
+        $this->baseUrl = rtrim($cfg->get('base_url', $this->baseUrl), '/');
+        $this->metricPrefix = rtrim($cfg->get('metric_prefix', $this->metricPrefix), '/');
+        $this->graphWidth = rtrim($cfg->get('graph_width', $this->graphWidth), '/');
+        $this->graphHeight = rtrim($cfg->get('graph_height', $this->graphHeight), '/');
+        $this->connectLimit = rtrim($cfg->get('connect_limit', $this->connectLimit), '/');
     }
 
     public function has(MonitoredObject $object)
@@ -93,7 +99,10 @@ class Grapher extends GrapherHook
         $url = Url::fromPath('graphite', array(
             'target' => urlencode($target),
             'base_url' => urlencode($this->baseUrl),
-            'metric_prefix' => urlencode($this->metricPrefix)
+            'metric_prefix' => urlencode($this->metricPrefix),
+            'graph_width' => urlencode($this->graphWidth),
+            'graph_height' => urlencode($this->graphHeight),
+            'connect_limit' => urlencode($this->connectLimit)
         ));
 
         $html = '<a href="%s" title="%s"><img src="%s" alt="%s" width="300" height="120" /></a>';
@@ -137,7 +146,10 @@ class Grapher extends GrapherHook
         $url = Url::fromPath('graphite', array(
             'target' => urlencode($target),
             'base_url' => urlencode($this->baseUrl),
-            'metric_prefix' => urlencode($this->metricPrefix)
+            'metric_prefix' => urlencode($this->metricPrefix),
+            'graph_width' => urlencode($this->graphWidth),
+            'graph_height' => urlencode($this->graphHeight),
+            'connect_limit' => urlencode($this->connectLimit)
         ));
 
         $html = '<a href="%s" title="%s"><img src="%s" alt="%s" width="300" height="120" /></a>';
