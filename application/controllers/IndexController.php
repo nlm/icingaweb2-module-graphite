@@ -10,7 +10,7 @@ class Graphite_IndexController extends ActionController
         $this->view->graph_height = $this->getParam('graph_height');
 
         $this->view->url = sprintf(
-            '%s&target=%s.%s&source=0&width=%d&height=%d&colorList=049BAF&lineMode=connected&connectedLimit=%d',
+            '%s&target=%s.%s&source=0&width=%d&height=%d&colorList=049BAF&lineMode=connected&connectedLimit=%d&minXStep=5',
             $this->getParam('base_url'),
             $this->getParam('metric_prefix'),
             $this->getParam('target'),
